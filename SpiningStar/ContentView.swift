@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // MARK: Stored Properties
+    @State var offset = -100.0
+    
+    //MARK: Computed properties
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Image(systemName: "star")
+            .resizable()
+            .frame(width: 40, height: 40)
+            .foregroundColor(.yellow)
+            .offset(x: offset, y: 0)
+        animation(.default)
+        
+        // Trigger to the animation
+            .onTapGesture {
+                offset = 100.0
+            }
     }
 }
 
