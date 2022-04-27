@@ -12,6 +12,10 @@ struct ContentView: View {
     // MARK: Stored Properties
     @State var offset = -100.0
     
+    // This is going to control rotation
+    
+    @State var starRotation = 0.0
+    
     //MARK: Computed properties
     var body: some View {
         Image(systemName: "star")
@@ -19,11 +23,18 @@ struct ContentView: View {
             .frame(width: 40, height: 40)
             .foregroundColor(.yellow)
             .offset(x: offset, y: 0)
-        animation(.default)
+        rotation3DEffect(Angle.degrees(starRotation),
+                         axis: (x: 0, y: 1, z: 0))
+        animation(
+            Animation
+                .easeInOut(duration: 2)
+                .repeatForever(autoreverses: true)
+        )
         
         // Trigger to the animation
             .onTapGesture {
                 offset = 100.0
+                starRotation = 360 * 2
             }
     }
 }
